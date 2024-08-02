@@ -1,24 +1,22 @@
 ```markdown
-# Medical Prescription Reader
+** Overview**
+The Medical Prescription Reader is a robust OCR (Optical Character Recognition) system designed to /n read and interpret medical prescriptions. Powered by Google Vertex Vision, this solution uses fine-tuned machine learning models to accurately recognize medication names and dosages. Integration with a comprehensive medical terminology database enables seamless medication identification and efficient web-based searches, ultimately improving healthcare workflows and patient experiences.
 
-## Overview
-The Medical Prescription Reader is a robust OCR (Optical Character Recognition) system designed to read and interpret medical prescriptions. Powered by Google Vertex Vision, this solution uses fine-tuned machine learning models to accurately recognize medication names and dosages. Integration with a comprehensive medical terminology database enables seamless medication identification and efficient web-based searches, ultimately improving healthcare workflows and patient experiences.
-
-## Features
+**Features**
 - **OCR using Google Vertex Vision:** High accuracy in reading handwritten and printed prescriptions.
 - **Medical Terminology Database Integration:** Enables accurate identification of medications.
 - **Web Interface:** Easy-to-use web interface for uploading prescriptions and viewing results.
 - **Logging and Configuration:** Comprehensive logging and configuration management.
 
 
-## Setup Instructions
+**Setup Instructions**
 
-### Prerequisites
+**Prerequisites**
 - Python 3.x
 - Google Cloud SDK with Vertex Vision API enabled
 - A Google Cloud service account with credentials
 
-### Installation
+**Installation**
 
 1. **Clone the repository:**
    ```bash
@@ -29,7 +27,7 @@ The Medical Prescription Reader is a robust OCR (Optical Character Recognition) 
 2. **Create a virtual environment and activate it:**
    ```bash
    python -m venv venv
-   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+   source venv/bin/activate  
    ```
 
 3. **Install the required packages:**
