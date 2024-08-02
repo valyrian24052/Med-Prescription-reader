@@ -1,0 +1,16 @@
+# Ignore Python bytecode
+*.pyc
+__pycache__/
+
+# Ignore virtual environment
+venv/
+
+# Ignore data
+data/raw/
+data/processed/
+
+# Ignore configuration
+config/config.yaml
+
+# Ignore Google Cloud credentials file
+config/credentials.json
