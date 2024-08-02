@@ -10,11 +10,6 @@ venv/
 # Ignore data
 data/raw/
 data/processed/
-<<<<<<< HEAD
->>>>>>> 4abcdae (aaa)
-=======
->>>>>>> 7efb7d750375185f00c181e926bc3f10d6bfc1c2
->>>>>>> 9595f7f36ffa16ab83c86b6d17412a1d2357c272
 
 # Ignore configuration
 config/config.yaml

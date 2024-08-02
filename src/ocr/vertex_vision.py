@@ -1,40 +1,56 @@
 import os
+import cv2
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 
-class VertexVisionChecker:
-    def __init__(self, credentials_path, image_path):
-        self.credentials_path = credentials_path
+class ImageProcessor:
+    CREDENTIALS_PATH = 'config/credentials.json'
+
+    def __init__(self, image_path):
         self.image_path = image_path
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = self.credentials_path
-        self.client = vision.ImageAnnotatorClient()
+        self.preprocessed_image = None
+        self.ocr_text = None
+
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = self.CREDENTIALS_PATH
+        self.vision_client = vision.ImageAnnotatorClient()
+
+        self._run_ocr()
 
     def load_image(self):
-        with open(self.image_path, 'rb') as image_file:
-            content = image_file.read()
-        return types.Image(content=content)
+        return cv2.imread(self.image_path)
 
-    def perform_ocr(self, image):
-        response = self.client.text_detection(image=image)
+    def preprocess(self):
+        image = self.load_image()
+        if image is None:
+            raise Exception(f"Error loading image: {self.image_path}")
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        self.preprocessed_image = cv2.resize(gray, (1280, 720))
+
+    def _run_ocr(self):
+        self.preprocess()
+
+        if self.preprocessed_image is None:
+            raise Exception("Image has not been preprocessed yet.")
+
+        _, buffer = cv2.imencode('.png', self.preprocessed_image)
+        image = types.Image(content=buffer.tobytes())
+
+        response = self.vision_client.text_detection(image=image)
         if response.error.message:
             raise Exception(f"Error in Vision API request: {response.error.message}")
-        return response.text_annotations
 
-    def print_detected_text(self, texts):
-        if texts:
-            print("Detected text:")
-            print(texts[0].description)
+        texts = response.text_annotations
+        self.ocr_text = texts[0].description if texts else ""
+
+    def get_ocr_text(self):
+        if self.ocr_text is not None:
+            return self.ocr_text
         else:
-            print("No text detected")
+            raise Exception("OCR has not been performed yet.")
 
-    def run(self):
-        image = self.load_image()
-        texts = self.perform_ocr(image)
-        self.print_detected_text(texts)
+    def save_preprocessed_image(self, output_path):
+        if self.preprocessed_image is not None:
+            cv2.imwrite(output_path, self.preprocessed_image)
+        else:
+            raise Exception("Image has not been preprocessed yet.")
 
-# Example usage
-if __name__ == "__main__":
-    credentials_path = 'config/credentials.json'
-    image_path = 'path/to/your/image.jpg'
-    checker = VertexVisionChecker(credentials_path, image_path)
-    checker.run()
