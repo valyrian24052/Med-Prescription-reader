@@ -1,5 +1,3 @@
-Sure, here's a sample `README.md` file for the `medical-prescription-reader` project:
-
 ```markdown
 # Medical Prescription Reader
 
@@ -12,59 +10,6 @@ The Medical Prescription Reader is a robust OCR (Optical Character Recognition) 
 - **Web Interface:** Easy-to-use web interface for uploading prescriptions and viewing results.
 - **Logging and Configuration:** Comprehensive logging and configuration management.
 
-## Directory Structure
-```
-medical-prescription-reader/
-│
-├── src/
-│   ├── __init__.py
-│   ├── ocr/
-│   │   ├── __init__.py
-│   │   ├── vertex_vision.py
-│   │   ├── preprocess.py
-│   │   └── postprocess.py
-│   ├── database/
-│   │   ├── __init__.py
-│   │   ├── medical_terminology.py
-│   │   └── database_connector.py
-│   ├── web/
-│   │   ├── __init__.py
-│   │   ├── app.py
-│   │   ├── templates/
-│   │   │   └── index.html
-│   │   ├── static/
-│   │   │   ├── css/
-│   │   │   └── js/
-│   ├── utils/
-│   │   ├── __init__.py
-│   │   ├── logger.py
-│   │   └── config.py
-│   ├── tests/
-│   │   ├── __init__.py
-│   │   ├── test_vertex_vision.py
-│   │   ├── test_medical_terminology.py
-│   │   └── test_app.py
-│   └── main.py
-│
-├── data/
-│   ├── raw/
-│   ├── processed/
-│
-├── docs/
-│
-├── config/
-│   ├── config.yaml
-│
-├── notebooks/
-│
-├── requirements.txt
-│
-├── README.md
-│
-├── setup.py
-│
-└── .gitignore
-```
 
 ## Setup Instructions
 
@@ -121,13 +66,8 @@ medical-prescription-reader/
 ## Contribution
 Contributions are welcome! Please open an issue or submit a pull request for any improvements or new features.
 
-## License
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
 ## Acknowledgements
 - Thanks to Google Cloud for providing the Vertex Vision API.
 - Inspired by the need to improve healthcare workflows and patient experience through technology.
 
 ```
-
-This `README.md` file provides an overview of the project, its features, the directory structure, setup instructions, and other important details. Adjust it as needed to better fit the specifics of your project and any additional information you might want to include.
