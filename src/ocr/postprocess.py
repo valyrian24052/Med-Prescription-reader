@@ -1,42 +1,30 @@
-import re
+from src.database.vector_db import VectorDatabase
 
 class TextPostprocessor:
-    def __init__(self, text):
+    def __init__(self, text, dataset_path):
         self.text = text
+        self.dataset_path = dataset_path
+        self.vector_db = VectorDatabase(dataset_path)
         self.medicine_name = None
         self.salt = None
 
-    def extract_medicine_info(self):
-        # Example patterns for medicine name and salt extraction
-        medicine_name_pattern = re.compile(r'\b[A-Z][a-z]+(?: [A-Z][a-z]+)*\b')
-        salt_pattern = re.compile(r'\b[a-zA-Z]+(?: [a-zA-Z]+)*\b')
-
-        # Split the text into lines for processing
-        lines = self.text.split('\n')
-
-        for line in lines:
-            # Search for medicine name
-            if self.medicine_name is None:
-                match = medicine_name_pattern.search(line)
-                if match:
-                    self.medicine_name = match.group(0)
-
-            # Search for salt
-            if self.salt is None:
-                match = salt_pattern.search(line)
-                if match:
-                    self.salt = match.group(0)
-
-            # If both are found, we can stop the search
-            if self.medicine_name and self.salt:
-                break
-
-        if not self.medicine_name:
+    def _search_database(self, query):
+        results = self.vector_db.search(query, top_k=1)
+        if not results.empty:
+            self.medicine_name = results['name'].values[0]
+            self.salt = results['salt'].values[0]
+        else:
             self.medicine_name = "Medicine name not found"
-        if not self.salt:
             self.salt = "Salt not found"
 
-    def extract(self):
+    def extract_medicine_info(self):
+        words = self.text.split()
+        for word in words:
+            self._search_database(word)
+            if self.medicine_name != "Medicine name not found":
+                break
+
+    def run(self):
         self.extract_medicine_info()
         return self.medicine_name, self.salt
 
@@ -47,7 +35,8 @@ if __name__ == "__main__":
     Paracetamol 500mg
     Take one tablet by mouth every 6 hours.
     """
-    postprocessor = TextPostprocessor(sample_text)
-    medicine_name, salt = postprocessor.extract()
+    dataset_path = 'data/processed/preprocessed_medicine_data.csv'
+    postprocessor = TextPostprocessor(sample_text, dataset_path)
+    medicine_name, salt = postprocessor.run()
     print("Medicine Name:", medicine_name)
     print("Salt:", salt)
