@@ -2,6 +2,15 @@
 *.pyc
 __pycache__/
 
+<<<<<<< HEAD
+=======
+# Ignore virtual environment
+venv/
+
+# Ignore data
+data/raw/
+data/processed/
+>>>>>>> 7efb7d750375185f00c181e926bc3f10d6bfc1c2
 
 # Ignore configuration
 config/config.yaml
