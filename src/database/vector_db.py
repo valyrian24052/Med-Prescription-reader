@@ -4,7 +4,7 @@ import pandas as pd
 import os
 
 class VectorDatabase:
-    VECTOR_SIZE = 100  # Adjust the vector size as needed
+    VECTOR_SIZE = 200
 
     def __init__(self, dataset_path, index_path='vector_index'):
         self.dataset_path = dataset_path
@@ -47,10 +47,3 @@ class VectorDatabase:
         distances, indices = self.index.search(np.array([query_vector]), top_k)
         results = self.medicine_data.iloc[indices[0]]
         return results
-
-# Example usage
-if __name__ == "__main__":
-    dataset_path = 'data/processed/preprocessed_medicine_data.csv'
-    vector_db = VectorDatabase(dataset_path)
-    vector_db.save_dataset()
-    print(f"Dataset saved to {dataset_path}")
