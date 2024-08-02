@@ -2,12 +2,6 @@
 *.pyc
 __pycache__/
 
-# Ignore virtual environment
-venv/
-
-# Ignore data
-data/raw/
-data/processed/
 
 # Ignore configuration
 config/config.yaml

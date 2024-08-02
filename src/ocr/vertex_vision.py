@@ -3,8 +3,7 @@ from google.cloud import vision
 from google.cloud.vision_v1 import types
 
 def check_vertex_vision_credentials(image_path):
-    # Set the environment variable for Google Cloud credentials
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "elated-nectar-425613-p8-4afb8278d0a4.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "config\credentials.json"
 
     # Initialize the Vision client
     client = vision.ImageAnnotatorClient()
