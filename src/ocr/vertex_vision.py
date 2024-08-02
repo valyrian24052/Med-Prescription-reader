@@ -32,6 +32,7 @@ class VertexVisionChecker:
         texts = self.perform_ocr(image)
         self.print_detected_text(texts)
 
+# Example usage
 if __name__ == "__main__":
     credentials_path = 'config/credentials.json'
     image_path = 'path/to/your/image.jpg'
