@@ -1,32 +1,74 @@
-import spacy
-from src.database.vector_db import VectorDatabase
+import os
+import json
+from google.oauth2 import service_account
+from google.auth.transport.requests import Request
+import requests
 
-class TextPostprocessor:
-    def __init__(self, text, dataset_path):
+class MedicalAssistant:
+    CREDENTIALS_PATH = 'config/credentials.json'
+    GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta2/models/text-bison-001:generateText"  # Gemini Pro API endpoint
+
+    def __init__(self, text):
         self.text = text
-        self.dataset_path = dataset_path
-        self.vector_db = VectorDatabase(dataset_path)
-        self.medicine_name = None
-        self.salt = None
-        self.nlp = spacy.load("en_core_web_sm")
+        self.credentials = None
 
-    def _search_database(self, query):
-        results = self.vector_db.search(query, top_k=1)
-        if not results.empty:
-            self.medicine_name = results['name'].values[0]
-            self.salt = results['salt'].values[0]
+        # Set the credentials
+        if os.path.exists(self.CREDENTIALS_PATH):
+            os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = self.CREDENTIALS_PATH
+            self.credentials = service_account.Credentials.from_service_account_file(self.CREDENTIALS_PATH)
         else:
-            self.medicine_name = "Medicine name not found"
-            self.salt = "Salt not found"
+            raise FileNotFoundError(f"Credentials file not found at {self.CREDENTIALS_PATH}")
 
-    def extract_medicine_info(self):
-        doc = self.nlp(self.text)
-        for ent in doc.ents:
-            if ent.label_ == "PRODUCT": 
-                self._search_database(ent.text)
-                if self.medicine_name != "Medicine name not found":
-                    break
+    def get_prescription_info(self):
+        payload = {
+            'system': 'You are a specialized medical assistant designed to extract prescription information from unstructured text. Your output must strictly adhere to the following format:\nProblem: [Medical Condition]\nSymptoms: [Patient\'s Reported Symptoms OR \'Not stated\']\nMedications:\n- [Medication 1 Name]: [Dosage 1 Instructions]\n- [Medication 2 Name]: [Dosage 2 Instructions]\n- [Medication 3 Name]: [Dosage 3 Instructions]',
+            'user': self.text
+        }
 
-    def run(self):
-        self.extract_medicine_info()
-        return self.medicine_name, self.salt
+        # Refresh the credentials to get the access token
+        request = Request()
+        self.credentials.refresh(request)
+
+        headers = {
+            'Authorization': f'Bearer {self.credentials.token}',
+            'Content-Type': 'application/json'
+        }
+
+        response = requests.post(self.GEMINI_API_URL, json=payload, headers=headers)
+
+        if response.status_code == 200:
+            data = response.json()
+            if "candidates" in data and data["candidates"]:
+                return data["candidates"][0]["output"]
+            else:
+                raise ValueError("Unexpected response format from Gemini API.")
+        else:
+            raise ValueError(f"Error in Gemini API request: {response.status_code}, {response.text}")
+
+# Example usage (Ensure GOOGLE_APPLICATION_CREDENTIALS environment variable is set):
+text_input = """
+Name: Armando
+Address: Went Rimbo
+Coqua
+makati
+9
+Age: 29
+Px
+Sex: M
+Date: 12-03-90
+City
+Hinox)
+Amoxicillin Joong Cap #21
+1.cap
+Sig: 1 cap 3x a day for
+Sween days.
+Physician's Sig.
+Lic. No.
+PTR No.
+S2 No.
+Idela Guy
+1234567
+"""
+assistant = MedicalAssistant(text_input)
+output = assistant.get_prescription_info()
+print(output)
