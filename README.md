@@ -4,7 +4,7 @@ The Medical Prescription Reader is a robust OCR (Optical Character Recognition) 
 
 
 ## Directory Structure
-
+'''
 medical-prescription-reader/
 │
 ├── config/
@@ -30,7 +30,7 @@ medical-prescription-reader/
 ├── README.md
 ├── requirements.txt
 └── vector_index
-
+'''
 
 ## Features
 
