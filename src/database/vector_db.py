@@ -27,12 +27,16 @@ class VectorDatabase:
         self.medicine_data['vector_id'] = np.arange(len(vectors))
 
         self.save_index()
+        self.save_dataset()
 
     def _load_or_build_index(self):
         if os.path.exists(self.index_path):
             self.index = faiss.read_index(self.index_path)
         else:
             self._build_index()
+            
+    def save_dataset(self):
+        self.medicine_data.to_csv(self.dataset_path, index=False)
 
     def save_index(self):
         faiss.write_index(self.index, self.index_path)

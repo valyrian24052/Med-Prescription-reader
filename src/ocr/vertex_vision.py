@@ -42,7 +42,7 @@ class ImageProcessor:
         texts = response.text_annotations
         self.ocr_text = texts[0].description if texts else ""
 
-    def get_ocr_text(self):
+    def get_text(self):
         if self.ocr_text is not None:
             return self.ocr_text
         else:
