@@ -18,3 +18,4 @@ config/config.yaml
 
 # Ignore Google Cloud credentials file
 config/credentials.json
+.vscode
