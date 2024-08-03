@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Postprocess",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "src.ocr.postprocess",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}
