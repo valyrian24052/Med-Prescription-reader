@@ -1,5 +1,5 @@
 import spacy
-from ..database.vector_db import VectorDatabase
+from src.database.vector_db import VectorDatabase
 
 class TextPostprocessor:
     def __init__(self, text, dataset_path):
@@ -22,7 +22,7 @@ class TextPostprocessor:
     def extract_medicine_info(self):
         doc = self.nlp(self.text)
         for ent in doc.ents:
-            if ent.label_ == "PRODUCT":  # Adjust the label as per your dataset
+            if ent.label_ == "PRODUCT": 
                 self._search_database(ent.text)
                 if self.medicine_name != "Medicine name not found":
                     break
