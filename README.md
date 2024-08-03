@@ -1,18 +1,19 @@
+
+```markdown
 ## Overview
 
 The Medical Prescription Reader is a robust OCR (Optical Character Recognition) system designed to read and interpret medical prescriptions. Powered by Google Vertex Vision, this solution uses fine-tuned machine learning models to accurately recognize medication names and dosages. Integration with a comprehensive medical terminology database enables seamless medication identification and efficient web-based searches, ultimately improving healthcare workflows and patient experiences.
 
 
 ## Directory Structure
-'''
+
+```
 medical-prescription-reader/
-│
 ├── config/
 ├── data/
 │   ├── processed/
 │   ├── raw/
 │   └── test/
-|
 ├── src/
 │   ├── database/
 │   │   ├── __init__.py
@@ -30,7 +31,7 @@ medical-prescription-reader/
 ├── README.md
 ├── requirements.txt
 └── vector_index
-'''
+```
 
 ## Features
 
@@ -50,25 +51,25 @@ medical-prescription-reader/
 ### Installation
 
 1. Clone the repository:
-   ```
+   ```bash
    git clone https://github.com/yourusername/medical-prescription-reader.git
    cd medical-prescription-reader
    ```
 
 2. Create a virtual environment and activate it:
-   ```
+   ```bash
    python -m venv venv
    source venv/bin/activate
    ```
 
 3. Install the required packages:
-   ```
+   ```bash
    pip install -r requirements.txt
    ```
 
 4. Set up Google Cloud credentials:
    - Download the service account key file and set the environment variable:
-     ```
+     ```bash
      export GOOGLE_APPLICATION_CREDENTIALS="path/to/credentials.json"
      ```
 
@@ -78,7 +79,7 @@ medical-prescription-reader/
 ### Running the Application
 
 1. Run the main script:
-   ```
+   ```bash
    python src/main.py
    ```
 
@@ -88,7 +89,7 @@ medical-prescription-reader/
 ### Testing
 
 - Run the tests using `pytest`:
-  ```
+  ```bash
   pytest src/tests/
   ```
 
@@ -100,3 +101,4 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 - Thanks to Google Cloud for providing the Vertex Vision API.
 - Inspired by the need to improve healthcare workflows and patient experience through technology.
+```
