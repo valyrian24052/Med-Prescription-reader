@@ -5,7 +5,7 @@ The Medical Prescription Reader is a robust OCR (Optical Character Recognition) 
 
 ## Directory Structure
 
-![image](https://github.com/user-attachments/assets/86de3270-a7ce-4110-9007-798955d8cc26)
+![image](https://github.com/user-attachments/assets/33aa2dd6-a201-493c-afa6-b41b06bacd11)
 
 
 ## Features
