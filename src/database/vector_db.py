@@ -26,7 +26,6 @@ class VectorDatabase:
         self.index.add(vectors)
         self.medicine_data['vector_id'] = np.arange(len(vectors))
 
-        # Save the index and data
         self.save_index()
         self.save_dataset()
 
