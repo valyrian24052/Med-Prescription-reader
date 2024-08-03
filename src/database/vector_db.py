@@ -26,9 +26,7 @@ class VectorDatabase:
         self.index.add(vectors)
         self.medicine_data['vector_id'] = np.arange(len(vectors))
 
-        # Save the index and data
         self.save_index()
-        self.save_dataset()
 
     def _load_or_build_index(self):
         if os.path.exists(self.index_path):
@@ -38,9 +36,6 @@ class VectorDatabase:
 
     def save_index(self):
         faiss.write_index(self.index, self.index_path)
-
-    def save_dataset(self):
-        self.medicine_data.to_csv(self.dataset_path, index=False)
 
     def search(self, query, top_k=1):
         query_vector = self._string_to_vector(query)
