@@ -2,6 +2,36 @@
 
 The Medical Prescription Reader is a robust OCR (Optical Character Recognition) system designed to read and interpret medical prescriptions. Powered by Google Vertex Vision, this solution uses fine-tuned machine learning models to accurately recognize medication names and dosages. Integration with a comprehensive medical terminology database enables seamless medication identification and efficient web-based searches, ultimately improving healthcare workflows and patient experiences.
 
+
+## Directory Structure
+
+medical-prescription-reader/
+│
+├── config/
+├── data/
+│   ├── processed/
+│   ├── raw/
+│   └── test/
+│       └── Screenshot 2024-08-03 012303.png
+├── src/
+│   ├── database/
+│   │   ├── __init__.py
+│   │   └── vector_db.py
+│   ├── ocr/
+│   │   ├── __init__.py
+│   │   ├── postprocess.py
+│   │   └── vertex_vision.py
+│   └── __init__.py
+├── tests/
+├── utils/
+├── web/
+├── .gitignore
+├── main.py
+├── README.md
+├── requirements.txt
+└── vector_index
+
+
 ## Features
 
 - OCR using Google Vertex Vision: High accuracy in reading handwritten and printed prescriptions.
