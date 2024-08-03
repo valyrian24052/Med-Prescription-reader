@@ -15,4 +15,4 @@ data/processed/
 config/config.yaml
 
 # Ignore Google Cloud credentials file
-config/credentials.json
+config\credentials.json
