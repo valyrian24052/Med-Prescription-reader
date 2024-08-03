@@ -2,16 +2,18 @@
 *.pyc
 __pycache__/
 
-<<<<<<< HEAD
-=======
+# Ignore specific __pycache__ directories
+src/database/__pycache__/
+src/ocr/__pycache__/
+
 # Ignore virtual environment
 venv/
 
-# Ignore data
+# Ignore data directories
 data/raw/
 data/processed/
 
-# Ignore configuration
+# Ignore configuration files
 config/config.yaml
 
 # Ignore Google Cloud credentials file
