@@ -1,4 +1,7 @@
-import pandas as pd
+from src.ocr.vertex_vision import ImageProcessor
 
-df=pd.read_csv(r'data\raw\A_Z_medicines_dataset_of_India.csv')
-print(df.columns)
+if __name__ == "__main__":
+    pres=ImageProcessor(r'data\test\sample.png')
+    print(pres.get_text())
+
+

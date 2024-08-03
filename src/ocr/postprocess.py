@@ -30,16 +30,3 @@ class TextPostprocessor:
     def run(self):
         self.extract_medicine_info()
         return self.medicine_name, self.salt
-
-# Example usage
-if __name__ == "__main__":
-    sample_text = """
-    Rx
-    Paracetamol 500mg
-    Take one tablet by mouth every 6 hours.
-    """
-    dataset_path = 'data/processed/preprocessed_medicine_data.csv'
-    postprocessor = TextPostprocessor(sample_text, dataset_path)
-    medicine_name, salt = postprocessor.run()
-    print("Medicine Name:", medicine_name)
-    print("Salt:", salt)
