@@ -12,7 +12,7 @@ medical-prescription-reader/
 │   ├── processed/
 │   ├── raw/
 │   └── test/
-│       └── Screenshot 2024-08-03 012303.png
+|
 ├── src/
 │   ├── database/
 │   │   ├── __init__.py
