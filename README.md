@@ -26,8 +26,8 @@ The Medical Prescription Reader is a robust OCR (Optical Character Recognition) 
 ### Installation
 
 1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/medical-prescription-reader.git
+   ```[
+   git clone https://github.com/yourusername/medical-prescription-reader.git](https://github.com/valyrian24052/Med-Prescription-reader.git
    cd medical-prescription-reader
    ```
 
